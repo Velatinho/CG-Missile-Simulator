@@ -2,16 +2,24 @@
 
 precision mediump float;
 
+in vec2 fsUv;
 in vec3 fsNormal;
+
 out vec4 outColor;
 
-uniform vec3 mDiffColor;        //material diffuse color
-uniform vec3 lightDirection;    // directional light direction vec
-uniform vec3 lightColor;        //directional light color 
+uniform sampler2D u_texture;
+uniform vec3 mDiffColor;
+uniform vec3 lightDirection;
+uniform vec3 lightColor;
+uniform vec3 eyePos;
+
 
 void main() {
+    vec3 nNormal = normalize(fsNormal);
+    vec3 lDir = (lightDirection);
+    vec3 lambertColor = mDiffColor * lightColor * dot(-lDir,nNormal);
+    vec4 textureColor = texture(u_texture, fsUv);
 
-  vec3 nNormal = normalize(fsNormal);
-  vec3 lambertColor = mDiffColor * lightColor * dot(-lightDirection,nNormal);
-  outColor = vec4(clamp(lambertColor, 0.00, 1.0),1.0);
+    //outColor = vec4(clamp(textureColor, 0.0, 1.0), 1.0);
+    outColor = textureColor;
 }
