@@ -1,22 +1,92 @@
 </html>
 <!DOCTYPE html>
 <html lang="en-US">
-	<head>
-		<title>Missile Simulator</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script type="text/javascript" src="lib/webgl-obj-loader.js"></script>
-        <script src="lib/quaternion.min.js"></script>
-		<script src="lib/utils.js"></script>
+<head>
+	<title>Missile Simulator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+		crossorigin="anonymous">
+		<!-- JS, Popper.js, and jQuery -->
+	<link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="lib/webgl-obj-loader.js"></script>
+    <script src="lib/quaternion.min.js"></script>
+	<script src="lib/utils.js"></script>
 
-		<script src="events.js"></script>
-        <script src="script2.js"></script>
-	</head>
+	<script src="events.js"></script>
+    <script src="script.js"></script>
+</head>
 
-	<body style="background-color: grey; margin:0">
-		<canvas id="my-canvas" width='1024' height='768' style="background-color: white;">
-			Your browser doesn't support the Canvas Element!
-		</canvas>
-	</body>
+<body style="background-color: grey; margin:0">
+	<canvas id="my-canvas" width='1024' height='768' style="background-color: white;">
+		Your browser doesn't support the Canvas Element!
+	</canvas>
+	<div id="box_fps">
+		FPS: <span id="fps"></span>
+	</div>
+	<div id="box">
+		<div class="container">
+			<div class="row" id="header">
+				CAMERA CONTROLS
+			</div>
+		 	<div class="row" id="controls">
+				<span id="key">W</span>
+				<span id="keytext"> Rotate UP <br/></span>
+			</div>
+			<div class="row" id="controls">
+				<span id="key">S</span>
+				<span id="keytext"> Rotate DOWN <br/></span>
+			</div>
+			<div class="row" id="controls">
+				<span id="key">A</span>
+				<span id="keytext"> Rotate LEFT <br/></span>
+			</div>
+			<div class="row" id="controls">
+				<span id="key">D</span>
+				<span id="keytext"> Rotate RIGHT <br/></span>
+			</div>
+			<div class="row" id="controls">
+				<span id="key">Q</span>
+				<span id="keytext"> Zoom OUT <br/></span>
+			</div>
+			<div class="row" id="controls">
+				<span id="key">E</span>
+				<span id="keytext"> Zoom IN <br/></span>
+			</div>
+			<div class="row" id="header">
+				MOVEMENT CONTROLS
+			</div>
+			<div class="row" id="controls">
+				<span id="key" style="width: 95px;">SPACEBAR</span>
+				<span id="keytext"><span id="startStop"></span><br/></span>
+			</div>
+			<div class="row" id="controls">
+				<span id="key">Y</span>
+				<span id="keytext"> Speed INCREASE <br/></span>
+			</div>
+			<div class="row" id="controls">
+				<span id="key">H</span>
+				<span id="keytext"> Speed DECREASE <br/></span>
+			</div>
+			<div class="row" id="controls">
+				<span id="keytext">Actual speed: <span id="setSpeed" style="color: orange"></span></span><br/>
+			</div>
+			<div class="row" id="controls">
+				<span id="key">U</span>
+				<span id="keytext"> Height INCREASE </span>
+			</div>
+			<div class="row" id="controls">
+				<span id="key">J</span>
+				<span id="keytext"> Height DECREASE </span>
+			</div>
+			<div class="row" id="controls">
+				<span id="keytext">Actual height: <span id="setHeight" style="color: orange"></span></span><br/>
+			</div>
 
+
+		</div>
+	</div>
+
+</body>
 </html>

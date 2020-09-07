@@ -4,6 +4,10 @@ let goW             = false;
 let goS             = false;
 let goA             = false;
 let goD             = false;
+let speedUp         = false;
+let speedDown       = false;
+let heightUp        = false;
+let heightDown      = false;
 let mouseState      = false;
 let lastMouseX      = -100;
 let lastMouseY      = -100;
@@ -12,30 +16,46 @@ document.onkeydown = function (e) {
     switch (e.key) {
         case 'E':
         case 'e':
-            zoomIn = true;
+            zoomIn      = true;
             break;
         case 'Q':
         case 'q':
-            zoomOut = true;
+            zoomOut     = true;
             break;
         case 'W':
         case 'w':
-            goW = true;
+            goW         = true;
             break;
         case 'S':
         case 's':
-            goS = true;
+            goS         = true;
             break;
         case 'A':
         case 'a':
-            goA = true;
+            goA         = true;
             break;
         case 'D':
         case 'd':
-            goD = true;
+            goD         = true;
+            break;
+        case 'Y':
+        case 'y':
+            speedUp     = true;
+            break;
+        case 'H':
+        case 'h':
+            speedDown   = true;
+            break;
+        case 'U':
+        case 'u':
+            heightUp    = true;
+            break;
+        case 'J':
+        case 'j':
+            heightDown  = true;
             break;
         case ' ':
-            toggleAnimationState();
+            startStopAnimation();
             break;
     }
 };
@@ -44,98 +64,96 @@ document.onkeyup = function (e) {
     switch (e.key){
         case 'E':
         case 'e':
-            zoomIn = false;
+            zoomIn      = false;
             break;
         case 'Q':
         case 'q':
-            zoomOut = false;
+            zoomOut     = false;
             break;
         case 'W':
         case 'w':
-            goW = false;
+            goW         = false;
             break;
         case 'S':
         case 's':
-            goS = false;
+            goS         = false;
             break;
         case 'A':
         case 'a':
-            goA = false;
+            goA         = false;
             break;
         case 'D':
         case 'd':
-            goD = false;
+            goD         = false;
+        case 'Y':
+        case 'y':
+            speedUp     = false;
+            break;
+        case 'H':
+        case 'h':
+            speedDown   = false;
+            break;
+        case 'U':
+        case 'u':
+            heightUp    = false;
+            break;
+        case 'J':
+        case 'j':
+            heightDown  = false;
+            break;
     }
 }
 
 
 function doMouseDown(event) {
-    lastMouseX = event.pageX;
-    lastMouseY = event.pageY;
-    mouseState = true;
+    lastMouseX  = event.pageX;
+    lastMouseY  = event.pageY;
+    mouseState  = true;
 }
 
 function doMouseUp(event) {
-    lastMouseX = -100;
-    lastMouseY = -100;
-    mouseState = false;
+    lastMouseX  = -100;
+    lastMouseY  = -100;
+    mouseState  = false;
 }
 
 function doMouseMove(event) {
     if (mouseState) {
-        let dx = event.pageX - lastMouseX;
-        let dy = lastMouseY - event.pageY;
-        lastMouseX = event.pageX;
-        lastMouseY = event.pageY;
+        let dx      = event.pageX - lastMouseX;
+        let dy      = lastMouseY - event.pageY;
+        lastMouseX  = event.pageX;
+        lastMouseY  = event.pageY;
 
         if ((dx != 0) || (dy != 0)) {
-            angle = angle + 0.5 * dx;
-            elevation = elevation + 0.5 * dy;
+            angle       = angle + 0.5 * dx;
+            elevation   = elevation + 0.5 * dy;
         }
     }
 }
 
-function doMouseWheel(event) { //why not working?
-    var nLookRadius = lookRadius + event.wheelDelta/200.0;
-    if((nLookRadius > 2.0) && (nLookRadius < 100.0)) {
-       lookRadius = nLookRadius;
-   }
+function doMouseWheel(event) {
+    var newRadius   = radius + event.wheelDelta/150.0;
+    if((newRadius > minRad) && (newRadius < maxRad))
+       radius       = newRadius;
 }
 
-function toggleAnimationState() {
+function doResize() {
+    // set canvas dimensions
+	var canvas = document.getElementById("my-canvas");
+    if((window.innerWidth > 40) && (window.innerHeight > 240)) {
+		canvas.width  = window.innerWidth-16;
+		canvas.height = window.innerHeight-200;
+		gl.viewport(0.0, 0.0, canvas.width, canvas.height);
+    }
+}
+
+function startStopAnimation() {
     if (!startMoving) {
-        if(counter + 1 === frames.length) {
-            counter = 0;
-            //rocket_sound.currentTime = 0;
+        if(counter + 1 === trajectory.length) {
+            counter     = 0;
         }
-        startMoving = true;
-        playAnimationChange();
+        startMoving     = true;
     } else {
-        startMoving = false;
-        pauseAnimationChange();
+        startMoving     = false;
     }
-}
-
-function resetAnimationState() {
-    if (startMoving) {
-        pauseAnimationChange();
-    }
-    startMoving = false;
-    counter = 0;
-    //rocket_sound.currentTime = 0;
-    //rocket_sound.pause();
-}
-
-function playAnimationChange() {
-    $("#action-btn").removeClass("btn-success");
-    $("#action-btn").addClass("btn-danger");
-    $("#action-btn").html("Pause");
-    //rocket_sound.play();
-}
-
-function pauseAnimationChange() {
-    $("#action-btn").removeClass("btn-danger");
-    $("#action-btn").addClass("btn-success");
-    $("#action-btn").html("Play");
-    //rocket_sound.pause();
 }
