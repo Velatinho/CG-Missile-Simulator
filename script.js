@@ -302,6 +302,9 @@ function main() {
     gl.enableVertexAttribArray  (normalAttributeLocation);
     gl.vertexAttribPointer      (normalAttributeLocation, 3, gl.FLOAT, false, 0, 0);
 
+    textureArray[1]             = gl.createTexture();
+    gl.bindTexture              (gl.TEXTURE_2D, textureArray[1]);
+
     loadTextureRuntime(1);
 
     trajectory = trajectoryMaker(poi[poiIndex], poi[poiIndex+1]);

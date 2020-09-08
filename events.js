@@ -123,7 +123,6 @@ function setLightAlpha(){
 
 function setLightBeta(){
     beta    = $("#betaLight").val();
-    console.log(beta);
 }
 
 
