@@ -8,12 +8,11 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
 		crossorigin="anonymous">
-		<!-- JS, Popper.js, and jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="lib/webgl-obj-loader.js"></script>
     <script src="lib/quaternion.min.js"></script>
 	<script src="lib/utils.js"></script>
-
 	<script src="events.js"></script>
     <script src="script.js"></script>
 </head>
@@ -54,6 +53,7 @@
 				<span id="key">E</span>
 				<span id="keytext"> Zoom IN <br/></span>
 			</div>
+			<br/>
 			<div class="row" id="header">
 				MOVEMENT CONTROLS
 			</div>
@@ -82,6 +82,28 @@
 			</div>
 			<div class="row" id="controls">
 				<span id="keytext">Actual height: <span id="setHeight" style="color: orange"></span></span><br/>
+			</div>
+			<br/>
+			<div class="row" id="header">
+				ENVIRONMENT CONTROLS
+			</div>
+			<div class="row" id="slider">
+				<input type="range" class="form-control-range" id="alphaLight"
+						min="0" max="360" oninput="setLightAlpha()" value="330">
+			</div>
+			<div class="row" id="slider">
+				<input type="range" class="form-control-range" id="betaLight"
+						min="1" max="360" oninput="setLightBeta()" value="140">
+			</div>
+			<div class="row" id="controls">
+				<span id="key">1</span>
+				<span id="key">2</span>
+				<span id="keytext"> Switch <br/></span>
+			</div>
+			<div class="row" id="controls">
+				<span id="key">3</span>
+				<span id="key">4</span>
+				<span id="keytext"> TEXTURE<br/></span>
 			</div>
 
 

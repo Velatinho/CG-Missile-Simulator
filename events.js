@@ -11,6 +11,7 @@ let heightDown      = false;
 let mouseState      = false;
 let lastMouseX      = -100;
 let lastMouseY      = -100;
+let soundEffect     = new Audio('Assets/Sound/soundEffect.mp3');
 
 document.onkeydown = function (e) {
     switch (e.key) {
@@ -53,6 +54,18 @@ document.onkeydown = function (e) {
         case 'J':
         case 'j':
             heightDown  = true;
+            break;
+        case '1':
+            loadTextureRuntime(1);
+            break;
+        case '2':
+            loadTextureRuntime(2);
+            break;
+        case '3':
+            loadTextureRuntime(3);
+            break;
+        case '4':
+            loadTextureRuntime(4);
             break;
         case ' ':
             startStopAnimation();
@@ -104,6 +117,15 @@ document.onkeyup = function (e) {
     }
 }
 
+function setLightAlpha(){
+    alpha   = $("#alphaLight").val();
+}
+
+function setLightBeta(){
+    beta    = $("#betaLight").val();
+    console.log(beta);
+}
+
 
 function doMouseDown(event) {
     lastMouseX  = event.pageX;
@@ -150,10 +172,11 @@ function doResize() {
 function startStopAnimation() {
     if (!startMoving) {
         if(counter + 1 === trajectory.length) {
-            counter     = 0;
+            counter = 0;
+            soundEffect.currentTime = 0;
         }
-        startMoving     = true;
+        startMoving = true;
     } else {
-        startMoving     = false;
+        startMoving = false;
     }
 }
